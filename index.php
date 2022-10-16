@@ -37,11 +37,30 @@ function getDataFromFile($filestream, $key = null){
 }
 
 $router->get("/", function (Request $request, Response $response) {
-    $request->append("time", date('d M Y'));
-    return $response->use_engine()->render("Views/index.html", $request);
+    $file = fopen('src/Mustard php backend developer  - Sheet1.csv', 'r');
+    $rates_array = getDataFromFile($file, 'date');
+    include_once __DIR__.'/src/views/index.php';
 });
 
-$router->get('/rates', function (Request $request, Response $response) {
+
+$router->get("/rates/:date", function (Request $request, Response $response) {
+        $date = $request->params("date");
+        $date = str_replace('%20', ' ',$date);// Removes special chars.
+
+        $file = fopen('src/Mustard php backend developer  - Sheet1.csv', 'r');
+        $rates_array = getDataFromFile($file, 'date');
+        $today_rate = null;
+        foreach($rates_array as $key => $value){
+            if(strpos($key, trim($date)) !== false){
+                $today_rate = $value['rate'];
+            }
+        }
+        include_once __DIR__.'/src/views/index.php';
+
+
+    
+});
+$router->get('/api/rates', function (Request $request, Response $response) {
     // $open = 
     
     
@@ -55,17 +74,21 @@ $router->get('/rates', function (Request $request, Response $response) {
     
 
 });
-$router->get("rates/:date", function (Request $request, Response $response) {
+$router->get("/api/rates/:date", function (Request $request, Response $response) {
         $date = $request->params("date");
         $date = str_replace('%20', ' ',$date);// Removes special chars.
 
         $file = fopen('src/Mustard php backend developer  - Sheet1.csv', 'r');
-        $data = getDataFromFile($file, 'date');
-        echo $date;
-        $data = $data[$date] ?? [];
+        $file_data = getDataFromFile($file, 'date');
+        $data = [];
+        foreach($file_data as $key => $value){
+            if(strpos($key, trim($date)) !== false){
+                $data = $value;
+            }
+        }
 
         return $response->send([
-            "message" => "Found Rate with date $date",
+            "message" => count($data) > 0 ? "Found Rate with date $date" : "Found No Rate with date $date",
             "status" => "success",
             "code" => 200,
             "data" =>  $data

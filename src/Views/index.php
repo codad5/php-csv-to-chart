@@ -9,11 +9,28 @@
     <title>Hello World!</title>
 </head>
 <body>
-    <h1>Hello World!</h1>
-<p>If you can see this, the server is working correctly.</p>
-Today's date: <b>@data(time)</b>
+<?php
+if(isset($today_rate)){
+?>
+    <b>Todays Rate : <?=$today_rate?></b>
+<?php
+}
+?>
 
+<h2>Avaliable Rates<h2>
+<ul>
+    <?php 
+    if(isset($rates_array)){
+        foreach($rates_array as $key => $value){
+            ?>
+               <li> <a href="/rates/<?=$value['date']?>"> <?=$value['date']?> </a> </li>
+            <?php
+        }
+    }
+?>
+</ul>
 
+<h1>OverTime Chart</h1>
 <canvas id="myChart" width="400" height="400" style="max-height:600px;max-width:800px;"></canvas>
 <!-- <script src="https://www.jsdelivr.com/package/npm/chart.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"
@@ -27,7 +44,7 @@ integrity="sha256-+8RZJua0aEWg+QVVKg4LEzEEm/8RFez5Tb4JBNiV5xA=" crossorigin="ano
     rates = []
     window.addEventListener('load', () => {
         console.log('hello');
-        fetch('/rates')
+        fetch('/api/rates')
         .then(res => res.json())
         .then(data => {
             // console.log(data.data)
