@@ -1,0 +1,21 @@
+{
+  "name": "trulyao/php-starter",
+  "description": "A PHP starter project",
+  "type": "template",
+  "require": {
+    "trulyao/php-router": "^2.0",
+    "vlucas/phpdotenv": "^5.4",
+    "ext-pdo": "*"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Trulyao\\PhpStarter\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Ayodeji O."
+    }
+  ]
+}
