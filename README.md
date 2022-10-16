@@ -5,8 +5,8 @@ This is a project that reads a csv file with data of dollar rate and the date bu
 ## Approaches
 
 - I will use [chart.js](https://www.chartjs.org) for a chart representaton
-- I used [php-router library](https://github.com/aosasona/php-router) for easy routing
-- for showing the chart i built a mini api to be consumed by the frontend while other datas are been echoed out directly
+- I used [php-router library](https://github.com/aosasona/php-router) for easy routing.
+- For showing the chart i built a mini api to be consumed by the frontend while other datas are been echoed out directly
 
 ### Running it
 

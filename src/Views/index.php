@@ -87,7 +87,7 @@ integrity="sha256-+8RZJua0aEWg+QVVKg4LEzEEm/8RFez5Tb4JBNiV5xA=" crossorigin="ano
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    // beginAtZero: true
                 }
             }
         }
