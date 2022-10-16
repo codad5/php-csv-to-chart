@@ -13,15 +13,24 @@ $dotenv->safeLoad();
 
 $router = new Router(__DIR__ . "/src", "");
 
-function getDataFromFile($filestream){
+function getDataFromFile($filestream, $key = null){
     $json_array = [];
     while(($data = fgetcsv($filestream, 1000, ',')) != false){
         // var_dump($data);
         if(intval($data[0])){
-            $json_array[] = [
+            if($key == 'date'){
+                $json_array[$data[1]] = [
                 'rate' => $data[0],
                 'date' => $data[1]
-            ];
+                ];
+            }
+            else{
+                $json_array[] = [
+                'rate' => $data[0],
+                'date' => $data[1]
+                ];
+            }
+            
         }
     }
     return $json_array;
@@ -46,33 +55,22 @@ $router->get('/rates', function (Request $request, Response $response) {
     
 
 });
-$router->get("json/:id", function (Request $request, Response $response) {
-    try {
-        $id = (int)$request->params("id");
+$router->get("rates/:date", function (Request $request, Response $response) {
+        $date = $request->params("date");
+        $date = str_replace('%20', ' ',$date);// Removes special chars.
 
-        if (!$id) throw new HTTPException("Invalid ID provided!", 400);
+        $file = fopen('src/Mustard php backend developer  - Sheet1.csv', 'r');
+        $data = getDataFromFile($file, 'date');
+        echo $date;
+        $data = $data[$date] ?? [];
 
         return $response->send([
-            "message" => "Hello World",
+            "message" => "Found Rate with date $date",
             "status" => "success",
             "code" => 200,
-            "data" => ["id" => $id]
+            "data" =>  $data
         ]);
-    } catch (HTTPException $e) {
-        return $response->status($e->getCode())->send([
-            "message" => $e->getMessage(),
-            "status" => "error",
-            "code" => $e->getCode(),
-            "data" => []
-        ]);
-    } catch (Exception $e) {
-        return $response->status(500)->send([
-            "message" => "Internal Server Error",
-            "status" => "error",
-            "code" => 500,
-            "data" => []
-        ]);
-    }
+    
 });
 
 $router->get("/phpmyadmin", function (Request $request, Response $response) {

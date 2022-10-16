@@ -23,6 +23,6 @@ RUN apt-get update && apt-get install -y libpq-dev \
 #    a2enmod rewrite && \
 #    a2dissite 000-default && \
 #    a2ensite web && \
-#    service apache2 restart  ---- this is to get rid of the Apache2 domain name-related error in dev
+#    service apache2 restart
 
 CMD ["start-web"]
