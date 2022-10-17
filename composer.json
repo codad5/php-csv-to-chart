@@ -1,6 +1,6 @@
 {
   "name": "trulyao/php-starter",
-  "description": "A PHP starter project",
+  "description": "A csv project ",
   "type": "template",
   "require": {
     "trulyao/php-router": "^2.0",
@@ -15,7 +15,10 @@
   },
   "authors": [
     {
-      "name": "Ayodeji O."
+      "name": "Chibueze Aniezeofor"
     }
   ]
-}
+},
+"scripts": {
+    "start": "php -S localhost:2000"
+    }
