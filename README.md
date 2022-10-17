@@ -31,6 +31,9 @@ php -S localhost:2000
 ![Screenshot](/public/Sample1.png)
 
 ![Screenshot](/public/Sample2.png)
+###### Added Filter
+
+![Screenshot](/public/Sample3.png)
 ### Routes
 
 - Index route `/` - This Shows the list of all avaliable rates and dates and also show then in a chart form
