@@ -39,7 +39,7 @@ function getDataFromFile($filestream, $key = null){
 $router->get("/", function (Request $request, Response $response) {
     $file = fopen('src/Mustard php backend developer  - Sheet1.csv', 'r');
     $rates_array = getDataFromFile($file, 'date');
-    include_once __DIR__.'/src/views/index.php';
+    include_once '/src/views/index.php';
 });
 
 
@@ -55,7 +55,7 @@ $router->get("/rates/:date", function (Request $request, Response $response) {
                 $today_rate = $value['rate'];
             }
         }
-        include_once __DIR__.'/src/views/index.php';
+        include_once '/src/views/index.php';
 
 
     
