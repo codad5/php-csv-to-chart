@@ -12,7 +12,7 @@
 <?php
 if(isset($today_rate)){
 ?>
-    <b>Todays Rate : <?=$today_rate?></b>
+    <b>Rate on <?=str_replace('%20', ' ', $request?->params('date'))?>  : <?=$today_rate?></b>
 <?php
 }
 ?>
